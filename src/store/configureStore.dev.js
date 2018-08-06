@@ -14,7 +14,10 @@ const initialState = {}
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [ sagaMiddleware, routerMiddleware(history), createLogger() ]
 
-const finalCreateStore = compose(applyMiddleware(...middleware), DevTools.instrument())
+const finalCreateStore = compose(
+  applyMiddleware(...middleware),
+  DevTools.instrument()
+)
 
 const store = createStore(reducers, initialState, finalCreateStore)
 

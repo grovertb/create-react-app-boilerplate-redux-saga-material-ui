@@ -30,10 +30,12 @@
     }
   },
   "dependencies": {
+    "@material-ui/core": "1.4.3",
     "babel-cli": "6.26.0",
     "babel-plugin-dynamic-import-node": "1.2.0",
     "babel-preset-env": "1.7.0",
     "compression": "1.7.2",
+    "concurrently": "3.6.1",
     "express": "4.16.3",
     "extensible-duck": "1.4.0",
     "ignore-styles": "5.0.1",
@@ -63,14 +65,14 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "dev": "concurrently \"npm run serve\" \"npm run start\" ",
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "eslint . --ext .js && react-app-rewired test --env=jsdom",
     "debug": "NODE_ENV=debug npm test",
     "format": "prettier-eslint --write \"{src,server}/**/*.js\" && eslint . --ext .js --fix",
     "eject": "react-scripts eject",
     "lint-staged": "lint-staged",
-    "dev": "NODE_ENV=development nodemon server/index.js",
-    "serve": "NODE_ENV=development node server/index.js",
+    "serve": "NODE_ENV=development nodemon server/index.js",
     "deploy": "NODE_ENV=production node server/index.js"
   },
   "pre-commit": "lint-staged",

@@ -4,6 +4,11 @@ import PropTypes from 'prop-types'
 
 import DevTools from './DevTools'
 
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+
+const muiTheme = createMuiTheme()
+
 export default class Root extends Component {
   render() {
     const { store, children } = this.props
@@ -11,7 +16,7 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <div>
-          {children}
+          <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
           <DevTools />
         </div>
       </Provider>

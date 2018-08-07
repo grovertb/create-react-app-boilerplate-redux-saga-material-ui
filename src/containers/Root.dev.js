@@ -1,22 +1,45 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
-import DevTools from './DevTools'
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-const muiTheme = createMuiTheme()
+import MaterialTheme from '../lib/MaterialTheme'
+import DevTools from './DevTools'
 
-export default class Root extends Component {
+import themeReducer from 'reducers/theme'
+
+let muiTheme
+
+class Root extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+    muiTheme = createMuiTheme(MaterialTheme[this.props.theme.style])
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      theme: { style }
+    } = nextProps
+
+    if(this.props.theme.style !== style) muiTheme = createMuiTheme(MaterialTheme[style])
+
+    return true
+  }
+
   render() {
     const { store, children } = this.props
 
     return (
       <Provider store={store}>
         <div>
-          <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
+          <MuiThemeProvider theme={muiTheme}>
+            <CssBaseline />
+            {children}
+          </MuiThemeProvider>
           <DevTools />
         </div>
       </Provider>
@@ -27,3 +50,12 @@ export default class Root extends Component {
 Root.propTypes = {
   store: PropTypes.object.isRequired
 }
+
+export default connect(
+  ({ theme }) => ({
+    theme
+  }),
+  {
+    updateTheme: themeReducer.creators.updateTheme
+  }
+)(Root)

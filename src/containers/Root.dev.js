@@ -25,7 +25,6 @@ class Root extends Component {
       theme: { style }
     } = nextProps
 
-    console.log('prueba')
     if(this.props.theme.style !== style) muiTheme = createMuiTheme(MaterialTheme[style])
 
     return true

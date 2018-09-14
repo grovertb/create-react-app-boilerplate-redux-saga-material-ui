@@ -9,7 +9,7 @@ export default {
       primary          : indigo,
       secondary        : pink,
       error            : red,
-      contrastThreshold: 10,
+      contrastThreshold: 4,
       background       : {
         'default': red
       }
@@ -62,9 +62,9 @@ export default {
   },
   dark: {
     palette: {
-      type     : 'dark',
-      primary  : pink,
-      secondary: indigo
+      type: 'dark'
+      // primary  : pink,
+      // secondary: indigo
     }
   }
 }

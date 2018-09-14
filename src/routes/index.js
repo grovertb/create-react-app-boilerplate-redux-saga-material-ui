@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import loadable from 'loadable-components'
 
@@ -9,8 +9,16 @@ const Dashboard = loadable(() => import(/* webpackChunkName: "Dashboard" */ 'con
   LoadingComponent: () => <Loading />
 })
 
+const Home = loadable(() => import(/* webpackChunkName: "Home" */ 'containers/Home'), {
+  LoadingComponent: () => <Loading />
+})
+
 export default history => (
   <ConnectedRouter history={history}>
-    <Route component={Dashboard} exact path='/' />
+    <Switch>
+      <Dashboard history={history}>
+        <Route component={Home} exact path='/' />
+      </Dashboard>
+    </Switch>
   </ConnectedRouter>
 )

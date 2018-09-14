@@ -4,7 +4,7 @@ export default base({
   namespace   : 'boilerplate',
   store       : 'theme',
   initialState: {
-    style: 'dark'
+    style: 'ligth'
   }
 }).extend({
   types  : [ 'UPDATE_THEME' ],

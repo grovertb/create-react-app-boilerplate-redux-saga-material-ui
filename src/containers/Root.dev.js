@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Provider, connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -25,6 +25,7 @@ class Root extends Component {
       theme: { style }
     } = nextProps
 
+    console.log('prueba')
     if(this.props.theme.style !== style) muiTheme = createMuiTheme(MaterialTheme[style])
 
     return true
@@ -34,15 +35,15 @@ class Root extends Component {
     const { store, children } = this.props
 
     return (
-      <Provider store={store}>
-        <div>
-          <MuiThemeProvider theme={muiTheme}>
+      <MuiThemeProvider theme={muiTheme}>
+        <Provider store={store}>
+          <Fragment>
             <CssBaseline />
             {children}
-          </MuiThemeProvider>
-          <DevTools />
-        </div>
-      </Provider>
+            <DevTools />
+          </Fragment>
+        </Provider>
+      </MuiThemeProvider>
     )
   }
 }

@@ -13,7 +13,7 @@ import createRoutes from '../src/routes'
 
 // A simple helper function to prepare the HTML markup
 const prepHTML = (data, { html, head, body, loadableState }) => {
-  data = data.replace('<html lang="en">', `<html ${html}`)
+  data = data.replace('<html lang="en">', `<html ${html} lang="es">`)
   data = data.replace('</head>', `${head}</head>`)
   data = data.replace('<div id="root"></div>', `<div id="root">${body}</div>`)
   data = data.replace('<script', loadableState + '<script')

@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { loadComponents } from 'loadable-components'
-// import registerServiceWorker from './registerServiceWorker'
+// import { loadComponents } from 'loadable-components'
+import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 
 if(module.hot) module.hot.accept()
 
 const render = Component => {
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <AppContainer key={Math.random()}>
       <Component />
     </AppContainer>,
@@ -16,11 +16,13 @@ const render = Component => {
   )
 }
 
-if(process.env.NODE_ENV === 'production')
-  loadComponents().then(() => {
-    render(App)
-  })
-else render(App)
+// if(process.env.NODE_ENV === 'production')
+//   loadComponents().then(() => {
+//     render(App)
+//   })
+// else render(App)
+
+render(App)
 
 // Webpack Hot Module Replacement API
 if(module.hot)
@@ -28,4 +30,4 @@ if(module.hot)
     render(require('./App').default)
   })
 
-// registerServiceWorker()
+registerServiceWorker()
